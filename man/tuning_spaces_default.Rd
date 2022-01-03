@@ -12,9 +12,9 @@
 \alias{regr.xgboost.default}
 \title{Default Tuning Spaces}
 \source{
-Bischl B, Binder M, Lang M, Pielok T, Richter J, Coors S, Thomas J, Ullmann T, Becker M, Boulesteix A (2021).
-\dQuote{A Practical Introduction into Hyperparameter Optimization: Algorithms, Software, Best Practices and Open Challenges.}
-\emph{arvixs}.
+Bischl B, Binder M, Lang M, Pielok T, Richter J, Coors S, Thomas J, Ullmann T, Becker M, Boulesteix A, Deng D, Lindauer M (2021).
+\dQuote{Hyperparameter Optimization: Foundations, Algorithms, Best Practices and Open Challenges.}
+2107.05847, \url{https://arxiv.org/abs/2107.05847}.
 }
 \description{
 Tuning spaces from the Bischl (2021) article.
@@ -25,6 +25,7 @@ Tuning spaces from the Bischl (2021) article.
 \item replace [TRUE,FALSE]
 \item sample.fraction \eqn{[0.1, 1]}{[0.1, 1]}
 \item num.trees \eqn{[1, 2000]}{[1, 2000]}
+\item mtry.ratio \eqn{[0, 1]}{[0, 1]}
 }
 }
 

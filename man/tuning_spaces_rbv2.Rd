@@ -14,7 +14,7 @@
 \source{
 Kuehn D, Probst P, Thomas J, Bischl B (2018).
 \dQuote{Automatic Exploration of Machine Learning Experiments on OpenML.}
-\emph{arvixs}.
+1806.10961, \url{https://arxiv.org/abs/1806.10961}.
 }
 \description{
 Tuning spaces from the Kuehn (2018) article.
@@ -40,11 +40,14 @@ Tuning spaces from the Kuehn (2018) article.
 \item num.trees \eqn{[1, 2000]}{[1, 2000]}
 \item replace [TRUE,FALSE]
 \item sample.fraction \eqn{[0.1, 1]}{[0.1, 1]}
+\item mtry.ratio \eqn{[0, 1]}{[0, 1]}
 \item respect.unordered.factors [\dQuote{ignore}, \dQuote{order}, \dQuote{partition}]
 \item min.node.size \eqn{[1, 100]}{[1, 100]}
 \item splitrule [\dQuote{gini}, \dQuote{extratrees}]
 \item num.random.splits \eqn{[1, 100]}{[1, 100]}
 }
+
+\code{mtry.power} is replaced by \code{mtry.ratio}.
 }
 
 \section{rpart tuning space}{

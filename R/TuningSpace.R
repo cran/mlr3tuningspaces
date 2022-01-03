@@ -2,9 +2,11 @@
 #'
 #' @description
 #' This is the abstract base class for tuning spaces which define a search space
-#' for hyperparameter tuning. `TuningSpace` objects store a list of
-#' [paradox::TuneToken] which can assigned to the values slot of learner's
-#' [paradox::ParamSet].
+#' for hyperparameter tuning.
+#'
+#' `TuningSpace` objects store a list of [paradox::TuneToken] and additional
+#' meta information. These tokens can be assigned to the `$values` slot of
+#' a learner's [paradox::ParamSet].
 #'
 #' @export
 #' @examples
@@ -63,7 +65,7 @@ TuningSpace = R6Class("TuningSpace",
       self$learner = assert_string(learner, min.chars = 1L)
       self$values = assert_list(values, names = "unique")
       self$tags = assert_character(tags, any.missing = FALSE)
-      self$package = assert_character(package, any.missing = FALSE)
+      self$package = union("mlr3tuningspaces", assert_character(package, any.missing = FALSE, min.chars = 1L))
     },
 
     #' @description
@@ -78,6 +80,25 @@ TuningSpace = R6Class("TuningSpace",
       learner = lrn(self$learner, ...)
       learner$param_set$values = insert_named(learner$param_set$values, lts(self$id)$values)
       learner
+    },
+
+    format = function(...) {
+       sprintf("<%s:%s>", class(self)[1L], self$id)
+    },
+
+    print = function(...) {
+      tab = imap_dtr(self$values, function(value, name) {
+        data.table(
+            id = name,
+            lower = value$content$lower,
+            upper = value$content$upper,
+            levels = list(value$content$param$levels),
+            logscale = isTRUE(value$content$logscale)
+          )
+        }, .fill = TRUE)
+      setcolorder(tab, c("id", "lower", "upper", "levels", "logscale"))
+      cat(format(self), sep = "\n")
+      print(tab)
     }
   )
 )
@@ -94,7 +115,7 @@ rd_info.TuningSpace = function(obj) { # nolint
   ps = lrn(obj$learner)$param_set
   c("",
     imap_chr(obj$values, function(space, name) {
- 
+
       switch(ps$params[[name]]$class,
         "ParamLgl" = sprintf("* %s \\[%s\\]", name, as_short_string(space$content$param$levels)),
         "ParamFct" = sprintf("* %s \\[%s\\]", name, rd_format_string(space$content$param$levels)),

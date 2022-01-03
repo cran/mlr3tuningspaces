@@ -5,9 +5,11 @@
 \title{Tuning Spaces}
 \description{
 This is the abstract base class for tuning spaces which define a search space
-for hyperparameter tuning. \code{TuningSpace} objects store a list of
-\link[paradox:to_tune]{paradox::TuneToken} which can assigned to the values slot of learner's
-\link[paradox:ParamSet]{paradox::ParamSet}.
+for hyperparameter tuning.
+
+\code{TuningSpace} objects store a list of \link[paradox:to_tune]{paradox::TuneToken} and additional
+meta information. These tokens can be assigned to the \verb{$values} slot of
+a learner's \link[paradox:ParamSet]{paradox::ParamSet}.
 }
 \examples{
 library(mlr3tuning)
@@ -50,6 +52,8 @@ instance$result
 \itemize{
 \item \href{#method-new}{\code{TuningSpace$new()}}
 \item \href{#method-get_learner}{\code{TuningSpace$get_learner()}}
+\item \href{#method-format}{\code{TuningSpace$format()}}
+\item \href{#method-print}{\code{TuningSpace$print()}}
 \item \href{#method-clone}{\code{TuningSpace$clone()}}
 }
 }
@@ -106,6 +110,24 @@ field. See \code{mlr3misc::dictionary_sugar_get()} for more details.}
 \subsection{Returns}{
 \link[mlr3:Learner]{mlr3::Learner}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-format"></a>}}
+\if{latex}{\out{\hypertarget{method-format}{}}}
+\subsection{Method \code{format()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{TuningSpace$format(...)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{TuningSpace$print(...)}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

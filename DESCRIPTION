@@ -1,6 +1,6 @@
 Package: mlr3tuningspaces
 Title: Search Spaces for Hyperparameter Tuning
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Marc", "Becker", , "marcbecker@posteo.de", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0002-8115-0400")),
@@ -27,9 +27,9 @@ RoxygenNote: 7.1.2
 Collate: 'mlr_tuning_spaces.R' 'TuningSpace.R' 'bibentries.R' 'sugar.R'
         'tuning_spaces_default.R' 'tuning_spaces_rbv2.R' 'zzz.R'
 NeedsCompilation: no
-Packaged: 2022-01-03 17:00:10 UTC; marc
+Packaged: 2022-01-19 18:54:51 UTC; marc
 Author: Marc Becker [cre, aut] (<https://orcid.org/0000-0002-8115-0400>),
   Michel Lang [ctb] (<https://orcid.org/0000-0001-9754-0393>)
 Maintainer: Marc Becker <marcbecker@posteo.de>
 Repository: CRAN
-Date/Publication: 2022-01-03 17:30:02 UTC
+Date/Publication: 2022-01-19 19:12:41 UTC

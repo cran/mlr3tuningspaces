@@ -12,11 +12,32 @@ Status](https://www.r-pkg.org/badges/version-ago/mlr3tuningspaces)](https://cran
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 <!-- badges: end -->
 
-Collection of search spaces for hyperparameter tuning. Includes various
-search spaces that can be directly applied to an `mlr3` learner.
-Additionally, meta information about the search space can be queried.
+Collection of search spaces for hyperparameter tuning in the
+[mlr3](https://github.com/mlr-org/mlr3/) ecosystem. Currently, we offer
+tuning spaces from two publications.
+
+| Publication          | Learner | n Hyperparameter |
+| -------------------- | ------- | ---------------- |
+| Bischl et al. (2021) | glmnet  | 2                |
+|                      | kknn    | 3                |
+|                      | ranger  | 4                |
+|                      | rpart   | 3                |
+|                      | svm     | 4                |
+|                      | xgboost | 8                |
+| Kuehn et al. (2018)  | glmnet  | 2                |
+|                      | kknn    | 1                |
+|                      | ranger  | 8                |
+|                      | rpart   | 4                |
+|                      | svm     | 5                |
+|                      | xgboost | 13               |
 
 ## Installation
+
+Install the last release from CRAN:
+
+``` r
+install.packages("mlr3tuningspaces")
+```
 
 Install the development version from GitHub:
 
@@ -26,17 +47,22 @@ remotes::install_github("mlr-org/mlr3tuningspaces")
 
 ## Example
 
-### Quick tuning
+### Quick Tuning
+
+A learner passed to the `lts()` function arguments the learner with the
+default tuning space from Bischl et al. (2021).
 
 ``` r
 library(mlr3tuningspaces)
 
-# tune learner with default search space
+learner = lts(lrn("classif.rpart"))
+
+# tune learner on pima data set
 instance = tune(
-  method = "random_search",
+  method = tnr("random_search"),
   task = tsk("pima"),
-  learner = lts(lrn("classif.rpart")),
-  resampling = rsmp ("holdout"),
+  learner = learner,
+  resampling = rsmp("holdout"),
   measure = msr("classif.ce"),
   term_evals = 10
 )
@@ -48,72 +74,114 @@ instance$result
     ##    minsplit minbucket        cp learner_param_vals  x_domain classif.ce
     ## 1: 4.174471 0.5070691 -4.542023          <list[4]> <list[3]>  0.1953125
 
-### Tuning search spaces
+### Tuning Search Spaces
+
+The `mlr_tuning_spaces` dictionary contains all tuning spaces.
 
 ``` r
 library("data.table")
 
-# print keys and learners
+# print keys and tuning spaces
 as.data.table(mlr_tuning_spaces)
 ```
 
-    ##                         key         learner n_values
-    ##  1:     classif.glmnet.rbv2  classif.glmnet        2
-    ##  2:       classif.kknn.rbv2    classif.kknn        1
-    ##  3:  classif.ranger.default  classif.ranger        3
-    ##  4:     classif.ranger.rbv2  classif.ranger        7
-    ##  5:   classif.rpart.default   classif.rpart        3
-    ##  6:      classif.rpart.rbv2   classif.rpart        4
-    ##  7:     classif.svm.default     classif.svm        4
-    ##  8:        classif.svm.rbv2     classif.svm        5
-    ##  9: classif.xgboost.default classif.xgboost        9
-    ## 10:    classif.xgboost.rbv2 classif.xgboost       13
-    ## 11:        regr.glmnet.rbv2     regr.glmnet        2
-    ## 12:          regr.kknn.rbv2       regr.kknn        1
-    ## 13:     regr.ranger.default     regr.ranger        3
-    ## 14:        regr.ranger.rbv2     regr.ranger        6
-    ## 15:      regr.rpart.default      regr.rpart        3
-    ## 16:         regr.rpart.rbv2      regr.rpart        4
-    ## 17:        regr.svm.default        regr.svm        4
-    ## 18:           regr.svm.rbv2        regr.svm        5
-    ## 19:    regr.xgboost.default    regr.xgboost        9
-    ## 20:       regr.xgboost.rbv2    regr.xgboost       13
+A key passed to the `lts()` function returns the `TuningSpace`.
 
 ``` r
-# get tuning space and view tune token
-tuning_space = lts("classif.rpart.default")
-tuning_space$values
+tuning_space = lts("classif.rpart.rbv2")
+tuning_space
 ```
 
-    ## $minsplit
-    ## Tuning over:
-    ## range [2, 128] (log scale)
-    ## 
-    ## 
-    ## $minbucket
-    ## Tuning over:
-    ## range [1, 64] (log scale)
-    ## 
-    ## 
-    ## $cp
-    ## Tuning over:
-    ## range [1e-04, 0.1] (log scale)
+    ## <TuningSpace:classif.rpart.rbv2>: RandomBot Classification Tree
+    ##           id lower upper levels logscale
+    ## 1:        cp 1e-04     1            TRUE
+    ## 2:  maxdepth 1e+00    30           FALSE
+    ## 3: minbucket 1e+00   100           FALSE
+    ## 4:  minsplit 1e+00   100           FALSE
+
+Get learner argumented with tuning space.
 
 ``` r
-# get learner with tuning space
-learner = tuning_space$get_learner()
-
-# tune learner
-instance = tune(
-  method = "random_search",
-  task = tsk("pima"),
-  learner = learner,
-  resampling = rsmp ("holdout"),
-  measure = msr("classif.ce"),
-  term_evals = 10)
-
-instance$result
+tuning_space$get_learner()
 ```
 
-    ##    minsplit minbucket        cp learner_param_vals  x_domain classif.ce
-    ## 1: 3.009338  2.506336 -8.291878          <list[4]> <list[3]>  0.2421875
+    ## <LearnerClassifRpart:classif.rpart>: Classification Tree
+    ## * Model: -
+    ## * Parameters: xval=0, cp=<RangeTuneToken>, maxdepth=<RangeTuneToken>,
+    ##   minbucket=<RangeTuneToken>, minsplit=<RangeTuneToken>
+    ## * Packages: mlr3, rpart
+    ## * Predict Types:  [response], prob
+    ## * Feature Types: logical, integer, numeric, factor, ordered
+    ## * Properties: importance, missings, multiclass, selected_features,
+    ##   twoclass, weights
+
+### Adding New Tuning Spaces
+
+We are looking forward to new collections of tuning spaces from
+peer-reviewed articles. You can suggest new tuning spaces in an issue or
+contribute a new collection yourself in a pull request. Take a look at
+an already implemented collection e.g. our [default tuning
+spaces](https://github.com/mlr-org/mlr3tuningspaces/blob/main/R/tuning_spaces_default.R)
+from Bischl et al. (2021). A `TuningSpace` is added to the
+`mlr_tuning_spaces` dictionary with the `add_tuning_space()` function.
+Create a tuning space for each variant of the learner e.g. for
+`LearnerClassifRpart` and `LearnerRegrRpart`.
+
+``` r
+vals = list(
+  minsplit  = to_tune(2, 64, logscale = TRUE),
+  cp        = to_tune(1e-04, 1e-1, logscale = TRUE)
+)
+
+add_tuning_space(
+  id = "classif.rpart.example",
+  values = vals,
+  tags = c("default", "classification"),
+  learner = "classif.rpart",
+  label = "Classification Tree Example"
+)
+```
+
+Choose a name that is related to the publication and adjust the
+documentation.
+
+The reference is added to the `bibentries.R` file
+
+``` r
+bischl_2021 = bibentry("misc",
+  key           = "bischl_2021",
+  title         = "Hyperparameter Optimization: Foundations, Algorithms, Best Practices and Open Challenges",
+  author        = "Bernd Bischl and Martin Binder and Michel Lang and Tobias Pielok and Jakob Richter and Stefan Coors and Janek Thomas and Theresa Ullmann and Marc Becker and Anne-Laure Boulesteix and Difan Deng and Marius Lindauer",
+  year          = "2021",
+  eprint        = "2107.05847",
+  archivePrefix = "arXiv",
+  primaryClass  = "stat.ML",
+  url           = "https://arxiv.org/abs/2107.05847"
+)
+```
+
+We are happy to help you with the pull request if you have any
+questions.
+
+## References
+
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-bischl_2021">
+
+Bischl, Bernd, Martin Binder, Michel Lang, Tobias Pielok, Jakob Richter,
+Stefan Coors, Janek Thomas, et al. 2021. “Hyperparameter Optimization:
+Foundations, Algorithms, Best Practices and Open Challenges.”
+<https://arxiv.org/abs/2107.05847>.
+
+</div>
+
+<div id="ref-kuehn_2018">
+
+Kuehn, Daniel, Philipp Probst, Janek Thomas, and Bernd Bischl. 2018.
+“Automatic Exploration of Machine Learning Experiments on Openml.”
+<https://arxiv.org/abs/1806.10961>.
+
+</div>
+
+</div>

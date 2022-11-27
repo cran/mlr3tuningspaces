@@ -1,20 +1,21 @@
 
 # mlr3tuningspaces
 
-Package website: [release](https://mlr3tuningspaces.mlr-org.com/)
+Package website: [release](https://mlr3tuningspaces.mlr-org.com/) |
+[dev](https://mlr3tuningspaces.mlr-org.com/dev/)
 
 <!-- badges: start -->
 
-[![tic](https://github.com/mlr-org/mlr3tuningspaces/workflows/tic/badge.svg?branch=main)](https://github.com/mlr-org/mlr3tuningspaces/actions)
+[![r-cmd-check](https://github.com/mlr-org/mlr3tuningspaces/actions/workflows/r-cmd-check.yml/badge.svg)](https://github.com/mlr-org/mlr3tuningspaces/actions/workflows/r-cmd-check.yml)
 [![CRAN
 Status](https://www.r-pkg.org/badges/version-ago/mlr3tuningspaces)](https://cran.r-project.org/package=mlr3tuningspaces)
 [![StackOverflow](https://img.shields.io/badge/stackoverflow-mlr3-orange.svg)](https://stackoverflow.com/questions/tagged/mlr3)
 [![Mattermost](https://img.shields.io/badge/chat-mattermost-orange.svg)](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)
 <!-- badges: end -->
 
-Collection of search spaces for hyperparameter tuning in the
-[mlr3](https://github.com/mlr-org/mlr3/) ecosystem. Currently, we offer
-tuning spaces from two publications.
+*mlr3tuningspaces* is a collection of search spaces for hyperparameter
+optimization in the [mlr3](https://github.com/mlr-org/mlr3/) ecosystem.
+Currently, we offer tuning spaces from two publications.
 
 | Publication          | Learner | n Hyperparameter |
 | -------------------- | ------- | ---------------- |
@@ -112,8 +113,7 @@ tuning_space$get_learner()
     ## * Packages: mlr3, rpart
     ## * Predict Types:  [response], prob
     ## * Feature Types: logical, integer, numeric, factor, ordered
-    ## * Properties: importance, missings, multiclass, selected_features,
-    ##   twoclass, weights
+    ## * Properties: importance, missings, multiclass, selected_features, twoclass, weights
 
 ### Adding New Tuning Spaces
 

@@ -1,3 +1,8 @@
+# mlr3tuningspaces 0.3.4
+
+* docs: Remove deprecated `method` argument of `mlr3tuning::tune()`.
+* docs: Update resources.
+
 # mlr3tuningspaces 0.3.3
 
 * fix: Extra `paradox::TuneToken` in `lts()` were not passed to learners created with `$get_learner()`.

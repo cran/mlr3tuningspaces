@@ -37,7 +37,7 @@ learner$param_set$values = tuning_space$values
 
 # tune learner
 instance = tune(
- method = "random_search",
+ tnr("random_search"),
  task = tsk("pima"),
  learner = learner,
  resampling = rsmp ("holdout"),
@@ -162,9 +162,16 @@ field. See \code{mlr3misc::dictionary_sugar_get()} for more details.}
 \subsection{Method \code{format()}}{
 Helper for print outputs.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TuningSpace$format()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{TuningSpace$format(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{(ignored).}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-TuningSpace-help"></a>}}

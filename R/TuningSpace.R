@@ -29,7 +29,7 @@
 #'
 #' # tune learner
 #' instance = tune(
-#'  method = "random_search",
+#'  tnr("random_search"),
 #'  task = tsk("pima"),
 #'  learner = learner,
 #'  resampling = rsmp ("holdout"),
@@ -123,7 +123,8 @@ TuningSpace = R6Class("TuningSpace",
 
     #' @description
     #' Helper for print outputs.
-    format = function() {
+    #' @param ... (ignored).
+    format = function(...) {
        sprintf("<%s:%s>", class(self)[1L], self$id)
     },
 

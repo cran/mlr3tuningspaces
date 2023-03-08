@@ -1,3 +1,7 @@
+# mlr3tuningspaces 0.3.5
+
+* fix: Add missing `...` parameter to `rd_info.TuningSpace()`.
+
 # mlr3tuningspaces 0.3.4
 
 * docs: Remove deprecated `method` argument of `mlr3tuning::tune()`.

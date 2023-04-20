@@ -14,20 +14,20 @@
 \alias{mlr_tuning_spaces_regr.rpart.rbv2}
 \alias{mlr_tuning_spaces_regr.svm.rbv2}
 \alias{mlr_tuning_spaces_regr.xgboost.rbv2}
-\title{RandomBot Tuning Spaces}
+\title{RandomBot V2 Tuning Spaces}
 \source{
-Kuehn D, Probst P, Thomas J, Bischl B (2018).
-\dQuote{Automatic Exploration of Machine Learning Experiments on OpenML.}
-1806.10961, \url{https://arxiv.org/abs/1806.10961}.
+Binder M, Pfisterer F, Bischl B (2020).
+\dQuote{Collecting Empirical Data About Hyperparameters for Data Driven AutoML.}
+\url{https://www.automl.org/wp-content/uploads/2020/07/AutoML_2020_paper_63.pdf}.
 }
 \description{
-Tuning spaces from the Kuehn (2018) article.
+Tuning spaces from the Binder (2020) article.
 }
 \section{glmnet tuning space}{
 
 \itemize{
 \item alpha \eqn{[0, 1]}{[0, 1]}
-\item s \eqn{[1e-04, 1000]}{[1e-04, 1000]}
+\item s \eqn{[1e-04, 1000]}{[1e-04, 1000]} Logscale
 }
 }
 
@@ -57,7 +57,7 @@ Tuning spaces from the Kuehn (2018) article.
 \section{rpart tuning space}{
 
 \itemize{
-\item cp \eqn{[1e-04, 1]}{[1e-04, 1]}
+\item cp \eqn{[1e-04, 1]}{[1e-04, 1]} Logscale
 \item maxdepth \eqn{[1, 30]}{[1, 30]}
 \item minbucket \eqn{[1, 100]}{[1, 100]}
 \item minsplit \eqn{[1, 100]}{[1, 100]}
@@ -68,9 +68,9 @@ Tuning spaces from the Kuehn (2018) article.
 
 \itemize{
 \item kernel [\dQuote{linear}, \dQuote{polynomial}, \dQuote{radial}]
-\item cost \eqn{[1e-04, 1000]}{[1e-04, 1000]}
-\item gamma \eqn{[1e-04, 1000]}{[1e-04, 1000]}
-\item tolerance \eqn{[1e-04, 2]}{[1e-04, 2]}
+\item cost \eqn{[1e-04, 1000]}{[1e-04, 1000]} Logscale
+\item gamma \eqn{[1e-04, 1000]}{[1e-04, 1000]} Logscale
+\item tolerance \eqn{[1e-04, 2]}{[1e-04, 2]} Logscale
 \item degree \eqn{[2, 5]}{[2, 5]}
 }
 }
@@ -79,14 +79,14 @@ Tuning spaces from the Kuehn (2018) article.
 
 \itemize{
 \item booster [\dQuote{gblinear}, \dQuote{gbtree}, \dQuote{dart}]
-\item nrounds \eqn{[2, 8]}{[2, 8]}
-\item eta \eqn{[1e-04, 1]}{[1e-04, 1]}
-\item gamma \eqn{[1e-05, 7]}{[1e-05, 7]}
-\item lambda \eqn{[1e-04, 1000]}{[1e-04, 1000]}
-\item alpha \eqn{[1e-04, 1000]}{[1e-04, 1000]}
+\item nrounds \eqn{[7, 2981]}{[7, 2981]} Logscale
+\item eta \eqn{[1e-04, 1]}{[1e-04, 1]} Logscale
+\item gamma \eqn{[1e-05, 7]}{[1e-05, 7]} Logscale
+\item lambda \eqn{[1e-04, 1000]}{[1e-04, 1000]} Logscale
+\item alpha \eqn{[1e-04, 1000]}{[1e-04, 1000]} Logscale
 \item subsample \eqn{[0.1, 1]}{[0.1, 1]}
 \item max_depth \eqn{[1, 15]}{[1, 15]}
-\item min_child_weight \eqn{[1, 100]}{[1, 100]}
+\item min_child_weight \eqn{[1, 100]}{[1, 100]} Logscale
 \item colsample_bytree \eqn{[0.01, 1]}{[0.01, 1]}
 \item colsample_bylevel \eqn{[0.01, 1]}{[0.01, 1]}
 \item rate_drop \eqn{[0, 1]}{[0, 1]}

@@ -1,7 +1,7 @@
-d464806c1c6522224f997132531bd612 *DESCRIPTION
+0f3fdd9760763fd7d3f63dbc6a7c84dc *DESCRIPTION
 30ee1cfc757ab13ebd05cb7be35e9a2b *NAMESPACE
-fe7f8c363a9e93e99fac422eea2c3a4b *NEWS.md
-3658b08292b339a2b9dd3227747870e6 *R/TuningSpace.R
+6177f4c8a9b6fbeb21c191829a1b2d5a *NEWS.md
+541d54258e75a4c9f53f9ffb718fd430 *R/TuningSpace.R
 d5bd9a54ee64fc09b7b70cc71181ec69 *R/bibentries.R
 33ace13b6663f3beb8374377d4c03442 *R/mlr_tuning_spaces.R
 b181199e44680c733b2a5d89bcf641dd *R/sugar.R
@@ -11,7 +11,7 @@ a193459cf76a5b3a611a9107f9b13cc0 *R/tuning_spaces_rbv2.R
 7cec332de42372d2c2f7076427ad1069 *R/zzz.R
 6d46abc17778b5d20489d30f28528dda *README.md
 c6b878d8ed383fd3e3e59e896fff8cd3 *inst/WORDLIST
-db678321c860093510eb67ef1f254446 *man/TuningSpace.Rd
+a849012a5d37d3de86642a9c4ec22adb *man/TuningSpace.Rd
 82e14b4c5103f6c7c22afbdb75cb5dfc *man/figures/logo.png
 ea1374618fee44e68d5cf37057551173 *man/lts.Rd
 236afbfdbd8e0fddfbee596fd3a4b2a7 *man/mlr3tuningspaces-package.Rd
@@ -22,7 +22,7 @@ e4f24e4168c7efb9b7f46ca0f8c9f89f *man/mlr_tuning_spaces_rbv2.Rd
 f20dd404253276a0d0d519872fcab438 *tests/testthat.R
 81b1ab664b239db76e3eb4916d1e59ba *tests/testthat/helper.R
 59d0b5e28b8f4f19312cc61075f8b77e *tests/testthat/test_TuningSpace.R
-159d5b9898eecebfb111c2a18b1083ab *tests/testthat/test_as_search_space.R
+d5cddf1607355720db8415e218bd00e6 *tests/testthat/test_as_search_space.R
 48881036606e323d16aead0655d99e5d *tests/testthat/test_mlr_tuning_spaces.R
 b38ab102ffc571ee44b159dfe3eccd09 *tests/testthat/test_sugar.R
 3289400977180cf85396e482e001c701 *tests/testthat/test_tuning_spaces.R

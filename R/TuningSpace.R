@@ -20,23 +20,29 @@
 #' @examples
 #' library(mlr3tuning)
 #'
-#' # get default tuning space of rpart learner
+#' # Get default tuning space of rpart learner
 #' tuning_space = lts("classif.rpart.default")
 #'
-#' # get learner and set tuning space
+#' # Set tuning space
 #' learner = lrn("classif.rpart")
 #' learner$param_set$values = tuning_space$values
 #'
-#' # tune learner
+#' # Tune learner
 #' instance = tune(
-#'  tnr("random_search"),
-#'  task = tsk("pima"),
-#'  learner = learner,
-#'  resampling = rsmp ("holdout"),
-#'  measure = msr("classif.ce"),
-#'  term_evals = 10)
+#'   tnr("random_search"),
+#'   task = tsk("pima"),
+#'   learner = learner,
+#'   resampling = rsmp ("holdout"),
+#'   measure = msr("classif.ce"),
+#'   term_evals = 10)
 #'
 #' instance$result
+#'
+#' library(mlr3pipelines)
+#'
+#' # Set tuning space in a pipeline
+#' graph_learner = as_learner(po("subsample") %>>%
+#'   lts(lrn("classif.rpart")))
 TuningSpace = R6Class("TuningSpace",
   public = list(
 
@@ -172,7 +178,7 @@ rd_info.TuningSpace = function(obj, ...) { # nolint
         "ParamFct" = sprintf("* %s \\[%s\\]", name, rd_format_string(space$content$levels[[1]])),
         {lower = c(space$content$param$lower, space$content$lower) # one is NULL
         upper = c(space$content$upper, space$content$param$upper)
-        logscale = if (space$content$logscale) "Logscale" else character(1)
+        logscale = if (is.null(space$content$logscale) || !space$content$logscale) character(1) else "Logscale"
         sprintf("* %s %s %s", name, rd_format_range(lower, upper), logscale)}
       )
     })
